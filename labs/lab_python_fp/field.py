@@ -13,15 +13,16 @@ def field(items, *args):
         if len(args) == 1:
             yield d[args[0]]
         else:
-            yield { d[x] for x in args }
+            temp = {}
+            for arg in args:
+                temp[arg] = d[arg]
+            yield temp
+            # yield { d[x] for x in args }
 
 
-a = field(goods, 'title', 'price')
-#b = field(goods, 'title', 'price')
-
-#print('a')
-for x in a:
-    print(x)
-#print('b')
-#for x in b:
-#    print(x)
+a = field(goods, 'title')
+b = field(goods, 'title', 'price')
+c = field(goods, 'title', 'price', 'color')
+print(list(a))
+print(list(b))
+print(list(c))
